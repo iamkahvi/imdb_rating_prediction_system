@@ -1,4 +1,4 @@
-- Now that we have our tables we can do the data transformation
+-- Now that we have our tables we can do the data transformation
 
 .headers on
 .separator ,
