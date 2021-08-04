@@ -7,7 +7,7 @@
 ## Goal
 
 
-## Dataset
+## IMDB Dataset
 * [Kaggle Link](https://www.kaggle.com/stefanoleone992/imdb-extensive-dataset?select=IMDb+names.csv)
 
 ## Links
