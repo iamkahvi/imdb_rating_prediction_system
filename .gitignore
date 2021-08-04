@@ -10,4 +10,5 @@ ipython_config.py
 
 # local folder to data
 data
+content
 *.csv

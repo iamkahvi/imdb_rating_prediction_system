@@ -2,7 +2,7 @@
 
 [Task Board](https://github.com/iamkahvi/imdb_recommendations/projects/1)
 ## Development
-
+`jupyter notebook .`
 
 ## Goal
 
