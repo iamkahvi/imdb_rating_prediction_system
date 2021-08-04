@@ -1,7 +1,7 @@
 -- Now that we have our tables we can do the data transformation
 
 .headers on
-.separator ,
+.separator \t
 .output movies_with_top_actor.csv
 
 -- Select the actors and their ranks
