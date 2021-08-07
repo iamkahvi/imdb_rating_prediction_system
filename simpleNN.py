@@ -233,7 +233,7 @@ def classificationOverfittingAnalysis(X, y):
             plt.plot(accuracies['accuracy'])
             plt.plot(accuracies['val_accuracy'])
             plt.legend(['Training', 'Testing'], loc='lower right')
-            plt.title('Dropout: ' + str(dropout_value) + ' L2 Regulization: ' + str(l2_value))
+            plt.title('Dropout: ' + str(dropout_value) + ' L2 Regularization: ' + str(l2_value))
             plt.ylabel('Accuracy')
             plt.xlabel('Epoch')
             
