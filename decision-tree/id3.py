@@ -159,7 +159,7 @@ if __name__ == "__main__":
     label_name = "weighted_average_vote"
 
     # Read the data
-    df = pd.read_csv("../content/combined_data_not_encoded.csv")
+    df = pd.read_csv("./content/combined_data_not_encoded.csv")
     # df = df.sample(n=1000, random_state=1337)
 
 
