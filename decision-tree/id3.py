@@ -168,11 +168,11 @@ if __name__ == "__main__":
     test = df.drop(train.index)
 
     # Round the scores to the nearest 0.5 for training
-    # train[label_name] *= 2
+    train[label_name] *= 2
     train = train.round({label_name: 0})
     print(train.head())
     print(test.head())
-    # train[label_name] /= 2
+    train[label_name] /= 2
 
     # Get a list of features
     features = list(df.columns.values)

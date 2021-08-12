@@ -24,37 +24,50 @@ test=df.drop(train.index)
 
 print(train.head())
 
-train_cols = ["genre", "country", "top_actor", "top_actor_gender", "language"]
-# train_cols = ["top_actor", "top_actor_gender", "divorces"]
-test_cols = train_cols.copy()
-test_cols.append(label_name)
+possible_cols = ["year", "genre", "duration", "country", "top_actor_gender", "top_actor", "divorces", "actor_age_at_release"]
+# selected_cols = ["genre", "country", "top_actor", "top_actor_gender", "language"]
+# selected_cols = ["top_actor", "top_actor_gender", "divorces"]
+# test_cols = selected_cols.copy()
+# test_cols.append(label_name)
 
-for col in train[train_cols]:
+for col in train[possible_cols]:
     train[col] = train[col].astype("category").cat.codes
 
-for col in test[train_cols]:
+for col in test[possible_cols]:
     test[col] = test[col].astype("category").cat.codes
 
 print(train.head())
 
-# Swap out these lines to change between a single decision tree
-# and a random forest
+best_mae = 9999999999
+best_cols = None
 
-# clf = RandomForestClassifier(n_estimators=50)
-clf = tree.DecisionTreeClassifier()
-clf = clf.fit(train[train_cols], train[label_name])
+for i in range(500):
+    k = random.choice(range(1, len(possible_cols)))
+    selected_cols = random.sample(possible_cols, k=k)
+    test_cols = selected_cols.copy()
+    test_cols.append(label_name)
 
-correct = 0
-error = 0
-for index, row in test.iterrows():
-    predict = clf.predict(row[train_cols].values.reshape(1, -1))
-    real = row[label_name]
-    curr_err = abs(real - predict[0])
-    error += curr_err
-    if predict[0] == real:
-        correct += 1
+    # Swap out these lines to change between a single decision tree
+    # and a random forest
+    # clf = RandomForestClassifier(n_estimators=100)
+    clf = tree.DecisionTreeClassifier()
+    clf = clf.fit(train[selected_cols], train[label_name])
 
-print("MAE: " + str(error / 10 / len(test)))
-print("Rate: " + str(correct / len(test) * 100) + "%")
+    correct = 0
+    error = 0
+    for index, row in test.iterrows():
+        predict = clf.predict(row[selected_cols].values.reshape(1, -1))
+        real = row[label_name]
+        curr_err = abs(real - predict[0])
+        error += curr_err
+        if predict[0] == real:
+            correct += 1
 
-# tree.plot_tree(clf)
+    mae = error / 10 / len(test)
+    if mae < best_mae:
+        best_mae = mae
+        best_cols = selected_cols.copy()
+
+    print("MAE: " + str(mae))
+    print(k, selected_cols)
+    print("Rate: " + str(correct / len(test) * 100) + "%")
