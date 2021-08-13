@@ -13,3 +13,5 @@ data
 content
 *.csv
 *.db
+decision-tree/tree.json
+__pycache__
