@@ -9,7 +9,7 @@ import sys
 import json
 
 # Most of the code here is based on my ID3 implementation
-# from assignment one.
+# from assignment one. This is cited in the report.
 
 np.random.seed(1337)
 random.seed(1337)
@@ -34,17 +34,12 @@ def entropy(df, feature_name, label_name):
     entropy = 0
 
     for key in classes:
-        # entropy calculation. same forumula from the slides
+        # entropy calculation. same forumula from the slides,
+        # adapted for any number of feature classes instead of
+        # just true/false like in the assignment
         val = classes[key]
-        # positive_samples = len(df[(feature == key) & (label == 1)])
-        # negative_samples = len(df[(feature == key) & (label == 0)])
         proportion = val / rows
         log = 0 if proportion == 0 else math.log(proportion, 2)
-        # a_n = positive_samples / val
-        # b_n = negative_samples / val
-        # avoid log(0) errors. when computing by hand it wouldn't matter because the coefficient would be 0
-        # too, but in python it will throw an error so we need to handle the log(0) case.
-        # logs = (-a_n) * (math.log(a_n, 2) if a_n != 0 else 0) - (b_n) * (math.log(b_n, 2) if b_n != 0 else 0)
 
         entropy -= proportion * log
 
